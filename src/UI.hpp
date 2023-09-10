@@ -4,7 +4,7 @@
 #include <halp/layout.hpp>
 #include <halp/meta.hpp>
 
-struct MyProcessor::ui 
+struct AvndOrbits::ui 
 {
   // If your compiler is recent enough:
   // using enum halp::colors;
@@ -17,6 +17,6 @@ struct MyProcessor::ui
   struct {
     halp_meta(layout, halp::layouts::hbox)
     halp_meta(background, halp::colors::dark)
-    halp::item<&ins::gain> widget;
+    // halp::item<&ins::gain> widget;
   } widgets;
 };
