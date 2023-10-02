@@ -5,12 +5,14 @@
 #include <halp/meta.hpp>
 #include "../orbits/src/Orbits.h"
 
+#define DEFAULT_NB_OF_PARTICLES 16 // totally arbitrary value
+
 class AvndOrbits
 {
 public:
   halp_meta(name, "AvndOrbits")
   halp_meta(c_name, "orbits")
-  halp_meta(uuid, "6ab6cfa4-7303-41fb-847d-58c99c3f2a19")
+  halp_meta(uuid, "6ab6cfa4-7303-41fb-847d-58c99c3f2a18")
 
   std::unique_ptr<Orbits::Orbits<3>> orbits;
 
@@ -45,21 +47,19 @@ public:
 
   void size(int s) {
     orbits->setSize(s < 0 ? 0 : s);
-    std::vector<float> v = { 3, 2, 1, 0 };
-    outputs.out.call(v);
-    // outputs.out.call({ 0, 1, 2, 3 });
+    // std::vector<float> v = { static_cast<float>(orbits->getSize()) };
+    // outputs.out.call(v);
   }
 
   void bang() {
     orbits->step();
-    std::vector<float> v = { 0, 1, 2, 3 };
-    outputs.out.call(v);
-    // outputs.out.call({ 3, 2, 1, 0 });
+    // std::vector<float> v = { 0, 1, 2, 3 };
+    // outputs.out.call(v);
   }
 
   // this is where we'd manage init arguments
-  void initialize() {
-    orbits.reset(new Orbits::Orbits<3>());
+  void initialize(float size = DEFAULT_NB_OF_PARTICLES) {
+    orbits.reset(new Orbits::Orbits<3>(static_cast<std::size_t>(size)));
   }
 
   // void operator()(double** ins, double** outs, int N);

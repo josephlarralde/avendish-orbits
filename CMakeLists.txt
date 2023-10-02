@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
-# set(CMAKE_CXX_STANDARD_REQUIRED 20)
 
 project(AvndOrbits)
 
