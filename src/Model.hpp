@@ -4,6 +4,8 @@
 #include <halp/controls.hpp>
 #include <halp/meta.hpp>
 #include "../orbits/src/Orbits.h"
+#include "../orbits/src/rules/Attractors.h"
+#include "../orbits/src/rules/Wandering.h"
 
 #define DEFAULT_NB_OF_PARTICLES 16 // totally arbitrary value
 
@@ -60,6 +62,8 @@ public:
   // this is where we'd manage init arguments
   void initialize(float size = DEFAULT_NB_OF_PARTICLES) {
     orbits.reset(new Orbits::Orbits<3>(static_cast<std::size_t>(size)));
+    orbits->addRule("center", std::shared_ptr<Orbits::Orbits<3>::Rule>(new Orbits::SimpleAttractor<3>()));
+    orbits->addRule("wander", std::shared_ptr<Orbits::Orbits<3>::Rule>(new Orbits::Wandering<3>()));
   }
 
   // void operator()(double** ins, double** outs, int N);
